@@ -6,7 +6,7 @@ namespace Basket.API.Repositories
 {
     public class BasketRepository : IBasketRepository
     {
-     
+
         private readonly IDistributedCache _redisCache;
 
         public BasketRepository(IDistributedCache redisCache)
@@ -18,7 +18,7 @@ namespace Basket.API.Repositories
         {
             var basket = await _redisCache.GetStringAsync(username);
             if (string.IsNullOrEmpty(basket))
-                return new ShoppingCart();
+                return new ShoppingCart(username);
 
             return JsonConvert.DeserializeObject<ShoppingCart>(basket);
         }
