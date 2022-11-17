@@ -1,5 +1,6 @@
 using Discount.Grpc.Extentions;
 using Discount.Grpc.Repositories;
+using Discount.Grpc.Services;
 //using Discount.Grpc.Services;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -9,6 +10,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 // DI
 builder.Services.AddScoped<IDiscountRepository, DiscountRepository>();
+builder.Services.AddAutoMapper(typeof(StartupBase));
 
 // Add services to the container.
 builder.Services.AddGrpc();
@@ -21,7 +23,7 @@ app.MigraieDatabase<Program>();
 // Configure the HTTP request pipeline.
 
 // Map GRPC Service added with Grpc
-//app.MapGrpcService<GreeterService>();
+app.MapGrpcService<DiscountService>();
 app.MapGet("/", () => "Communication with gRPC endpoints must be made through a gRPC client. To learn how to create a client, visit: https://go.microsoft.com/fwlink/?linkid=2086909");
 
 app.Run();
