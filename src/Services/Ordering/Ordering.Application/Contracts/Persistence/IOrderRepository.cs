@@ -2,7 +2,7 @@
 {
     using Ordering.Domain.Entities;
 
-    public interface IOrderRepositorys : IAsyncRepository<Order>
+    public interface IOrderRepository : IAsyncRepository<Order>
     {
         Task<IEnumerable<Order>> GetOrdersByUsername(string userName);
     }
