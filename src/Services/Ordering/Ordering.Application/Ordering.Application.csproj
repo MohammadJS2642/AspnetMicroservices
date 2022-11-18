@@ -7,13 +7,14 @@
   </PropertyGroup>
 
   <ItemGroup>
+	  <PackageReference Include="FluentValidation" Version="11.3.0" />
 	  <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="11.0.0" />
+	  <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="7.0.0" />
 	  <ProjectReference Include="..\Ordering.Domain\Ordering.Domain.csproj" />
   </ItemGroup>
 
   <ItemGroup>
     <Folder Include="Behaviours\" />
-    <Folder Include="Features\Orders\Commands\" />
   </ItemGroup>
 
   <ItemGroup>
