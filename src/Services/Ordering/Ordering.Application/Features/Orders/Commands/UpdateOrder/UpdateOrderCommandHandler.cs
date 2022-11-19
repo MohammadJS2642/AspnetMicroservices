@@ -24,7 +24,10 @@ namespace Ordering.Application.Features.Orders.Commands.UpdateOrder
             _logger = logger;
         }
 
-        public async Task<Unit> Handle(UpdateOrderCommand request, CancellationToken cancellationToken)
+        public async Task<Unit> Handle(
+            UpdateOrderCommand request,
+            CancellationToken cancellationToken
+        )
         {
             var orderToUpdate = await _orderRepository.GetByIdAsync(request.Id);
             if (orderToUpdate == null)
@@ -42,5 +45,6 @@ namespace Ordering.Application.Features.Orders.Commands.UpdateOrder
             return Unit.Value;
 
         }
+
     }
 }
