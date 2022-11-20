@@ -2,6 +2,8 @@
 using MediatR;
 using Microsoft.Extensions.Logging;
 using Ordering.Application.Contracts.Persistence;
+using Ordering.Application.Exception;
+using Ordering.Domain.Entities;
 
 namespace Ordering.Application.Features.Orders.Commands.DeleteOrder
 {
@@ -28,7 +30,7 @@ namespace Ordering.Application.Features.Orders.Commands.DeleteOrder
             var orderToDelete = await _repository.GetByIdAsync(request.Id);
             if (orderToDelete == null)
             {
-                _logger.LogError("Order not exist on database.");
+                throw new NotFoundException(nameof(Order), request.Id);
             }
 
             await _repository.DeleteAsync(orderToDelete);
@@ -36,7 +38,6 @@ namespace Ordering.Application.Features.Orders.Commands.DeleteOrder
 
             return Unit.Value;
         }
-
 
     }
 }
