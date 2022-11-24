@@ -1,17 +1,22 @@
-﻿using Ordering.Domain.Entities;
+﻿using Microsoft.Extensions.Logging;
+using Ordering.Domain.Entities;
 
 namespace Ordering.Infrastructure.Persistence
 {
     public static class OrderContextSeed
     {
 
-        public static async Task SeedAsync(OrderContext orderContext)
+        public static async Task SeedAsync(OrderContext orderContext, ILogger<OrderContext> logger)
         {
+
+            logger.LogInformation("Context beging to start");
+
             if (!orderContext.Orders.Any())
             {
                 orderContext.Orders.AddRange(GetPreconfiguredOrders());
                 await orderContext.SaveChangesAsync();
             }
+
         }
 
         private static IEnumerable<Order> GetPreconfiguredOrders()
