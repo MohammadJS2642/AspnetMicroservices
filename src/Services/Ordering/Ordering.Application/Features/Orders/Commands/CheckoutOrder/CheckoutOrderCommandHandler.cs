@@ -37,7 +37,7 @@ namespace Ordering.Application.Features.Orders.Commands.CheckoutOrder
             var orderEntity = _mapper.Map<Order>(request);
             var newOrder = await _orderRepository.AddAsync(orderEntity);
 
-            _logger.LogInformation($"Order {newOrder.Id} is successfully created.");
+            _logger.LogInformation("Order {orderID} is successfully created.", newOrder.Id);
 
             await SendMail(orderEntity);
 
@@ -58,9 +58,11 @@ namespace Ordering.Application.Features.Orders.Commands.CheckoutOrder
             {
                 await _emailService.SendEmail(email);
             }
-            catch (Exception ex)
+            catch (System.Exception ex)
             {
-                _logger.LogError($"Order {order.Id} failed due to an error with the email service: {ex.Message}");
+                _logger.LogError("Order {orderID} failed due to an error with the email service: {exMessage}",
+                    order.Id, ex.Message
+                );
             }
 
         }
